@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef } from "react";
 
 function App() {
+  const canvasRef = useRef();
+
+  const drawRectangle = () => {
+    const context = canvasRef.current.getContext("2d");
+    context.strokeStyle = "white";
+    context.lineWidth = 2;
+    context.strokeRect(50, 30, 110, 90);
+    context.strokeRect(170, 65, 100, 80);
+  };
+
+  useEffect(() => {
+    drawRectangle();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{margin:'60px'}}>
+      <canvas
+        ref={canvasRef}
+        style={{
+          width: "600px",
+          height: "400px",
+          background: "url('./bg-img.jpg')",
+        }}
+      />
     </div>
   );
 }
